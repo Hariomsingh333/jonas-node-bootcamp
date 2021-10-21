@@ -52,3 +52,12 @@ server.listen(3000, () => {
   console.log("your server is on");
 });
 ```
+
+### 404 page
+
+```js
+  else {
+    res.writeHead(404);
+    res.end("page not found 404");
+  }
+```

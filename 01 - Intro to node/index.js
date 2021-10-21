@@ -23,7 +23,8 @@ const server = http.createServer((req, res) => {
     res.end("i am lorem");
   } else if (urlReq === "/") {
     res.end("<h1>this is home</h1>");
-  } else {
+  } // for 404 page
+  else {
     res.writeHead(404);
     res.end("page not found 404");
   }
