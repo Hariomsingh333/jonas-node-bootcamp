@@ -21,6 +21,11 @@ const server = http.createServer((req, res) => {
     res.end("hello from the server");
   } else if (urlReq === "/lorem") {
     res.end("i am lorem");
+  } else if (urlReq === "/") {
+    res.end("<h1>this is home</h1>");
+  } else {
+    res.writeHead(404);
+    res.end("page not found 404");
   }
 });
 //listing
