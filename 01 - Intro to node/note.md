@@ -94,3 +94,35 @@ server.listen(3000, () => {
   console.log("you server is on in localhost");
 });
 ```
+
+# Date: 23 / 10 / 2021
+
+# Build a very simple api
+
+fast of all what is a api
+
+## What is a API ?
+
+API Stand for
+
+- Application
+- programing
+- Interfaces
+
+**A API IS A SERVES THAT WE CAN REQUEST SOME DATA**
+so here we have dev-data folder we have some json data.
+
+```js
+  } else if (path === "/api") {
+    // read the file using fs
+    // "__dirname === ./"
+    fs.readFile("./dev-data/data.json", "utf-8", (err, data) => {
+      // convert to json
+      // const productData = JSON.parse(data);
+      // console.log(productData);
+      // say to browser that we can send json in browser
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(data);
+    });
+
+```
