@@ -65,3 +65,67 @@ app.listen(port, () => {
   console.log("you server is on in " + port);
 });
 ```
+
+## APIs and RESTful API Design
+
+so now we know that how to use express and build api but first let's talk about APIs and RESTful API on a higher level,
+
+### WHAT IS AN API ANYWAY?
+
+API Stand for
+
+- Application
+- Programing
+- Interface
+
+Application Programing Interface: a pice of software that can be used by another piece of software, in order to allow to talk each other.
+
+### THE REST ARCHITECTURE
+
+REST, Which Stand for
+
+- Representational
+- States
+- Transfer
+
+is basically a way of building web APIs in a logical way, making them easy to consume
+<br>
+in REST architecture we have some important principle
+
+- separate API into logical **resources**
+- expose structured, **resource-based URLs**
+- use **HTTP method**
+- send data as **JSON**
+- must be state less
+
+#### 1. resources
+
+the key abstraction of information in REST is a resource, and therefor all the data we wanna share in the API should be divided into logical resources.
+<br>
+what is resources?
+object or representation of something, which has data associated to it, like name, user, reviews.
+
+#### 2. resource-based URLs (expose structured)
+
+like : https://www.example.com/addneW
+U R L S ENDPOINT
+
+MAKE A CURD operation
+C = create (http method: POST)
+R = Read (http method: GET )
+U = Update(http method: PUT/PATCH)
+D = delete (http method: DELETE)
+
+#### JSON
+
+json stand for
+
+- javascript
+- object
+- notation
+
+json is a very lite weight data interchange format, which is heavily used by web APIs coded is any programing language.
+
+#### Stateless
+
+stateless RESTful API: All state is handle on the client. this means that each request must contain all the necessary to process a certain request the server should not have to remember pervious requests.
