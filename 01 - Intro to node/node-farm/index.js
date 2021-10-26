@@ -16,7 +16,9 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { "Content-type": "text/html" });
     res.end(home);
   } else if (path === "/product") {
-    res.end("this is product path");
+    const product = fs.readFileSync("./templates/product.html");
+    res.writeHead(200, { "content-type": "text/html" });
+    res.end(product);
   } else if (path === "/api") {
     // read the file using fs
     // "__dirname === ./"

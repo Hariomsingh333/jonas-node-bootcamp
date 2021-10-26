@@ -138,3 +138,110 @@ app.get("/user", (req, res) => {
   res.sendFile(path.join(__dirname, "./user.html"));
 });
 ```
+
+## adding our first get request
+
+```js
+// let's create our first get route
+const tours = JSON.parse(
+  fs.readFileSync(`${__dirname}/dev-data/data/tours.json`)
+);
+app.get("/api/v1/tours", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours,
+    },
+  });
+});
+
+// server the app
+const port = 3000;
+app.listen(port, () => {
+  console.log("you server is on in " + port);
+});
+```
+
+now we are create a hard coded data and save as a json file but in future we use nosql database that simlar to json, so in future we use data base not a json file.
+
+## Handling post request
+
+so always remember when you send deal with get request it's mean we send something server to client
+<br>
+but when we deal with post it's mean we take some thing client
+<br>
+
+let see how to create any thing using post request, one more thing now we are using json file to store data so in later we use database so this is just for practice
+
+```js
+// let's create a post request
+
+// remember in post request we send data to client to server.
+app.post("/api/v1/tours", (req, res) => {
+  // req store the all data because client send us data.
+  console.log(req.body);
+  res.send("done");
+});
+
+// server the app
+const port = 3000;
+app.listen(port, () => {
+  console.log("you server is on in " + port);
+});
+```
+
+## Responding to URL parameters
+
+let learn about url parameters.
+<br>
+so when we hit this url we get all the file
+
+```js
+localhost: 3000 / api / v1 / tours;
+
+// 127.0.0.1:3000/api/v1/tours
+```
+
+but we need see only one file with the change of url, mean when we hit this url then we get only one item
+
+```js
+localhost: 3000 / api / v1 / tours / 5;
+```
+
+so how we do that
+<br>
+so first of all we need to create a variable to our route, because 5 or any number is the data that can store some were.
+
+```js
+// create a variable in our route
+app.get("/api/v1/tours/:id", (req, res)=>{
+```
+
+so there id /:id is the variable,
+<br>
+
+log in the console what we request to in the :id variable
+
+```js
+app.get("/api/v1/tours/:id", (req, res) => {
+  // params mean parameter
+  console.log(req.params); // {id: "5"}
+});
+```
+
+```js
+//responding to url parameters
+app.get("/api/v1/tours/:id", (req, res) => {
+  // console.log(req.params); // {id: "5"}
+  const { id } = req.params.id;
+  const tour = tours.find((el) => el.id === id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      tour,
+    },
+  });
+});
+```
+
+remember this is only practice, we deal with data base later but the concept is the same

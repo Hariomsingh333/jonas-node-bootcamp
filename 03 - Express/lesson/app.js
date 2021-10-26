@@ -6,6 +6,8 @@ const app = express();
 const fs = require("fs");
 
 const path = require("path");
+// middle ware for post
+app.use(express.json());
 // create routes
 
 // app.get("/", (req, res) => {
@@ -33,6 +35,27 @@ app.get("/api/v1/tours", (req, res) => {
       tours,
     },
   });
+});
+
+//responding to url parameters
+app.get("/api/v1/tours/:id", (req, res) => {
+  // console.log(req.params); // {id: "5"}
+  const { id } = req.params.id;
+  const tour = tours.find((el) => el.id === id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      tour,
+    },
+  });
+});
+// let's create a post request
+
+// remember in post request we send data to client to server.
+app.post("/api/v1/tours", (req, res) => {
+  // req store the all data because client send us data.
+  console.log(req.body);
+  res.send("done");
 });
 
 // server the app
