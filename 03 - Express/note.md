@@ -129,3 +129,12 @@ json is a very lite weight data interchange format, which is heavily used by web
 #### Stateless
 
 stateless RESTful API: All state is handle on the client. this means that each request must contain all the necessary to process a certain request the server should not have to remember pervious requests.
+
+## serve a html using express
+
+```js
+// server a html file using express
+app.get("/user", (req, res) => {
+  res.sendFile(path.join(__dirname, "./user.html"));
+});
+```
