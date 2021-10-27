@@ -28,19 +28,19 @@ app.use(express.json());
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
-app.get("/api/v1/tours", (req, res) => {
+
+// define all of the callback function
+const getAllTours = (req, res) => {
   res.status(200).json({
     status: "success",
     data: {
       tours,
     },
   });
-});
+};
 
-//responding to url parameters
-app.get("/api/v1/tours/:id", (req, res) => {
+const getTour = (req, res) => {
   // console.log(req.params); // {id: "5"}
-
   // convert id string to number just multiply
   const id = req.params.id * 1;
   const tour = tours.find((el) => el.id === id);
@@ -56,17 +56,14 @@ app.get("/api/v1/tours/:id", (req, res) => {
       tour,
     },
   });
-});
-// let's create a post request
-// remember in post request we send data to client to server.
-app.post("/api/v1/tours", (req, res) => {
+};
+
+const createTour = (req, res) => {
   // req store the all data because client send us data.
   console.log(req.body);
   res.send("done");
-});
-
-// patch request for update data
-app.patch("/api/v1/tours/:id", (req, res) => {
+};
+const updateTour = (req, res) => {
   // 404 not found
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -80,10 +77,8 @@ app.patch("/api/v1/tours/:id", (req, res) => {
       tours: "<Update .........>",
     },
   });
-});
-// handling delete request
-
-app.delete("/api/v1/tours/:id", (req, res) => {
+};
+const deleteTour = (req, res) => {
   // 204 means not content, when we handle with delete method we use 204 status code.
   if (req.params.id * 1 > tours.length) {
     return res.status(404).json({
@@ -95,8 +90,28 @@ app.delete("/api/v1/tours/:id", (req, res) => {
     status: "success delete",
     data: "null",
   });
-});
+};
 
+// // all routes
+// app.get("/api/v1/tours", getAllTours);
+// //responding to url parameters
+// app.get("/api/v1/tours/:id", getTour);
+// // let's create a post request
+// // remember in post request we send data to client to server.
+// app.post("/api/v1/tours", createTour);
+// // patch request for update data
+// app.patch("/api/v1/tours/:id", updateTour);
+// // handling delete request
+// app.delete("/api/v1/tours/:id", deleteTour);
+
+// using the app.route() method and define the all route at once
+app.route("/api/vi/tours").get(getAllTours).post(createTour);
+
+app
+  .route("/api/v1/tours/:id")
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour);
 // server the app
 const port = 3000;
 app.listen(port, () => {
