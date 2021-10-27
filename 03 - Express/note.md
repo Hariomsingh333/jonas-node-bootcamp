@@ -245,3 +245,58 @@ app.get("/api/v1/tours/:id", (req, res) => {
 ```
 
 remember this is only practice, we deal with data base later but the concept is the same
+
+## Handling PATCH requests
+
+Handling PATCH requests for update data.
+
+```js
+// patch request for update data
+app.patch("/api/v1/tours/:id", (req, res) => {
+  // 404 not found
+  // req.params.id is string, we need to change in number so we multiply by 1 and its convert to number
+  // req.params.id = :id
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: "fail",
+      message: "you id is wrong",
+    });
+  }
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours: "Updating.........",
+    },
+  });
+});
+```
+
+## Handling Delete request
+
+when we deal with delete method the we send 204 http status code, 204 mean nothing there, use for delete.
+
+```js
+app.delete("/api/v1/tours/:id", (req, res) => {
+  // 204 means not content, when we handle with delete method we use 204 status code.
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: "fail",
+      message: "you id is wrong 404 not found",
+    });
+  }
+  res.status(204).json({
+    status: "success delete",
+    data: "null",
+  });
+});
+```
+
+- now we add CRUD
+  CRUD stand for
+- C = CREATE (post)
+- R = READ (get)
+- U = UPDATE (patch)
+- D = DELETE (delete)
+  **one thing remember this is just practice with some json data, but we use database later but the principal is same so this is just practice**
+
+now this is end of this note and note2 we learn about how to organize code and how to write code without mesh and next note2 is important.
