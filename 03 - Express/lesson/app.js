@@ -5,9 +5,19 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 
+const morgan = require("morgan");
+
 const path = require("path");
-// middle ware for post
+
+app.use(morgan("dev"));
+// middleware for post request (replace of body-parser)
 app.use(express.json());
+
+// creating our own middleware function
+app.use((req, res, next) => {
+  console.log("Hello from middleware function");
+  next();
+});
 // create routes
 
 // app.get("/", (req, res) => {
@@ -105,7 +115,7 @@ const deleteTour = (req, res) => {
 // app.delete("/api/v1/tours/:id", deleteTour);
 
 // using the app.route() method and define the all route at once
-app.route("/api/vi/tours").get(getAllTours).post(createTour);
+app.route("/api/v1/tours").get(getAllTours).post(createTour);
 
 app
   .route("/api/v1/tours/:id")
