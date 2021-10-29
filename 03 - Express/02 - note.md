@@ -162,3 +162,61 @@ morgan middleware is just let you know which type of request you get it should b
 app.use(morgan("dev"));
 // GET /api/v1/tours 304 4.693 ms - -
 ```
+
+## creating and mounting multiple routes
+
+in this section thing to get a bit advanced. and that is because we'll now create multiple routes and use a process called mounting.
+<br>
+
+let keep in mind that the ultimate goal will be to separate all the code that we have in that _app.js_ file into multiple files.
+
+- one file that only contains all of these routes
+  - tours
+  - users
+- i will also want to have a file which contains the handlers
+
+## separate the route, creating our own router
+
+now we can say that our all routes that they're all kind of on a same router, Okay? and the router, is the app object. but if we want to separate these routes into different files then the best think to do create our own router for each of this resources.
+
+_first we need to require our router_
+
+```js
+const toursRoute = express.Router();
+```
+
+now we create a router using **express.Router** function. and stor in a variable
+<br>
+so now let's use that router for our routes
+
+```js
+// app.route("/api/v1/tours").get(getAllTours).post(createTour);
+
+// app
+//   .route("/api/v1/tours/:id")
+//   .get(getTour)
+//   .patch(updateTour)
+//   .delete(deleteTour);
+
+toursRoute.route("/api/v1/tours").get(getAllTours).post(createTour);
+
+toursRoute
+  .route("/api/v1/tours/:id")
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour);
+```
+
+now how do we connect the routes with our application? _well we'll use it as middleware, alright?_
+
+```js
+app.use("/api/v1/tours", toursRoute);
+```
+
+```js
+const toursRoute = express.Router();
+app.use("/api/v1/tours", toursRoute);
+toursRoute.route("/").get(getAllTours).post(createTour);
+
+toursRoute.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
+```
