@@ -13,6 +13,16 @@ exports.prams = (req, res, next, val) => {
   console.log(`here is your param ${val}`);
   next();
 };
+
+exports.checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    return res.status(404).json({
+      status: "error",
+      message: "you have don't fill the name and price",
+    });
+  }
+  next();
+};
 // handler
 exports.getAllTours = (req, res) => {
   res.status(200).json({
@@ -44,7 +54,7 @@ exports.getTour = (req, res) => {
 
 exports.createTour = (req, res) => {
   // req store the all data because client send us data.
-  console.log(req.body);
+  // console.log(req.body);
   res.send("done");
 };
 exports.updateTour = (req, res) => {
@@ -58,6 +68,7 @@ exports.updateTour = (req, res) => {
 exports.deleteTour = (req, res) => {
   // 204 means not content, when we handle with delete method we use 204 status code.
   if (req.params.id * 1 > tours.length) {
+    console.log(`here is your param ${val}`);
     return res.status(404).json({
       status: "fail",
       message: "you id is wrong 404 not found",
