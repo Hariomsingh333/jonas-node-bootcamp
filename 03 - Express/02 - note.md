@@ -220,3 +220,22 @@ toursRoute.route("/").get(getAllTours).post(createTour);
 
 toursRoute.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
 ```
+
+# Date: 31 / 10 / 2021
+
+## Param Middleware
+
+so param middleware a middleware that only runs for certain parameters, so basically when we have a certain parameter in our url.
+<br>
+
+now in our example here, the only parameter that we might have in our route URL is the **id**.
+
+```js
+// param middleware
+router.param("id", (req, res, next, val) => {
+  console.log(`here is your param ${val}`);
+  next();
+});
+```
+
+- that val stand for value in the one that will actually hold the value of the id parameter.

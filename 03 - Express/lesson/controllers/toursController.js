@@ -2,6 +2,17 @@ const fs = require("fs");
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 );
+exports.prams = (req, res, next, val) => {
+  // 404 not found
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: "fail",
+      message: "you id is wrong",
+    });
+  }
+  console.log(`here is your param ${val}`);
+  next();
+};
 // handler
 exports.getAllTours = (req, res) => {
   res.status(200).json({
@@ -37,13 +48,6 @@ exports.createTour = (req, res) => {
   res.send("done");
 };
 exports.updateTour = (req, res) => {
-  // 404 not found
-  if (req.params.id * 1 > tours.length) {
-    return res.status(404).json({
-      status: "fail",
-      message: "you id is wrong",
-    });
-  }
   res.status(200).json({
     status: "success",
     data: {

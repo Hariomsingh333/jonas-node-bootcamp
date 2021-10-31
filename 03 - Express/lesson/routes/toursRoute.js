@@ -9,6 +9,9 @@ router
   .get(toursController.getAllTours)
   .post(toursController.createTour);
 
+// param middleware
+router.param("id", toursController.prams);
+
 router
   .route("/:id")
   .get(toursController.getTour)
