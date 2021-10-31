@@ -239,3 +239,33 @@ router.param("id", (req, res, next, val) => {
 ```
 
 - that val stand for value in the one that will actually hold the value of the id parameter.
+
+## Serve Static file
+
+let's learn how server static file using express.
+<br>
+what i mean a static file, static file mean a file that live in our currently file system like we public/home.html file in our file system
+<br>
+but we cannot access using a route,
+<br>
+so how to serve the html file using express and make a route for this html page that any hit the route then show the html page
+<br>
+we need to use builtin express middleware.
+
+```js
+// app.js
+app.use(express.static(`${__dirname}/public`));
+```
+
+- we need to create a public folder, under the public folder we need to create a html page.
+- then hit the localhost:3000/youname.html
+
+### 2nd way to server html file using express
+
+```js
+// app.js
+const path = require("path");
+app.get("/", (req, res) => {
+  res.sendFile(path.join(`${__dirname}/public/home.html`));
+});
+```

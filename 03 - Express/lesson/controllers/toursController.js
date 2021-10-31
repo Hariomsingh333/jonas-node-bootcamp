@@ -54,7 +54,7 @@ exports.getTour = (req, res) => {
 
 exports.createTour = (req, res) => {
   // req store the all data because client send us data.
-  // console.log(req.body);
+  console.log(req.body);
   res.send("done");
 };
 exports.updateTour = (req, res) => {
