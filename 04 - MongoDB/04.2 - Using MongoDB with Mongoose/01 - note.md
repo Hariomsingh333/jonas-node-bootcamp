@@ -108,3 +108,23 @@ const tourSchema = new mongoose.Schema({
 // mongoose model
 const Tour = mongoose.model("Tour", tourSchema);
 ```
+
+### test the schema and model
+
+```js
+// testing the schema and model
+const testTour = new Tour({
+  name: "The Forest Hiker",
+  rating: 4.7,
+  price: 497,
+});
+// give promise so we use .then but in future we async/await
+testTour
+  .save()
+  .then((doc) => {
+    console.log(doc);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
