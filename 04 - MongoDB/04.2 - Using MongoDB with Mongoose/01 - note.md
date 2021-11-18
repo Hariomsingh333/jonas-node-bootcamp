@@ -128,3 +128,29 @@ testTour
     console.log(err);
   });
 ```
+
+## Create documents using mongoose
+
+best way to create documents using mongoose
+
+```js
+// controllers/toursControllers.js
+exports.createTour = async (req, res) => {
+  // create tour using mongoose model
+  try {
+    const newTour = await Tour.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: {
+        tour: newTour,
+      },
+    });
+  } catch (err) {
+    // console.log(err);
+    res.status(400).json({
+      status: "failed",
+      message: err,
+    });
+  }
+};
+```
