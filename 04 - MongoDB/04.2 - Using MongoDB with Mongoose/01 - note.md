@@ -154,3 +154,33 @@ exports.createTour = async (req, res) => {
   }
 };
 ```
+
+## Reading documents using mongoose
+
+using the .find() method
+
+```js
+exports.getAllTours = async (req, res) => {
+  const tours = await Tour.find();
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours,
+    },
+  });
+};
+```
+
+```js
+try {
+  const tour = await Tour.findById(req.params.id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      tour,
+    },
+  });
+} catch (error) {
+  console.log(error);
+}
+```
