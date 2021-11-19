@@ -17,16 +17,32 @@ exports.prams = (req, res, next, val) => {
 };
 
 // handler
-exports.getAllTours = (req, res) => {
-  // res.status(200).json({
-  //   status: "success",
-  //   data: {
-  //     tours,
-  //   },
-  // });
+exports.getAllTours = async (req, res) => {
+  try {
+    const tours = await Tour.find();
+    res.status(200).json({
+      status: "success",
+      data: {
+        tours,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-exports.getTour = (req, res) => {
+exports.getTour = async (req, res) => {
+  try {
+    const tour = await Tour.findById(req.params.id);
+    res.status(200).json({
+      status: "success",
+      data: {
+        tour,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
   // console.log(req.params); // {id: "5"}
   // convert id string to number just multiply
   // const id = req.params.id * 1;

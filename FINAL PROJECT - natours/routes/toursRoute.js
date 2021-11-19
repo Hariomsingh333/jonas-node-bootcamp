@@ -10,7 +10,7 @@ router
   .post(toursController.createTour);
 
 // param middleware
-router.param("id", toursController.prams);
+// router.param("id", toursController.prams);
 
 router
   .route("/:id")
